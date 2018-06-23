@@ -4,10 +4,10 @@
   "description": "A carpooling application that provides drivers with the ability to create ride offers and passengers to join available ride offers.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint-fix",
+    "lint": "eslint server --fix",
     "dev": "nodemon server/app.js --exec babel-node",
     "test": "nyc mocha --require babel-register server/test/* --exit",
-    "start": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
+    "start": "node dist/app.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel server -d dist --presets es2015,stage-2",
     "serve": "node dist/app.js"

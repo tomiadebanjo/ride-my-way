@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A carpooling application that provides drivers with the ability to create ride offers and passengers to join available ride offers.",
   "main": "index.js",
+  "engines": {
+    "node": "8.10.0"
+  },
   "scripts": {
     "lint": "eslint server --fix",
     "dev": "nodemon server/app.js --exec babel-node",

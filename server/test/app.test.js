@@ -18,6 +18,19 @@ describe('API endpoints test', () => {
     });
   });
 
+  describe('api v1 route /api/v1', () => {
+    it('should return welcome message', (done) => {
+      chai
+        .request(server)
+        .get('/api/v1')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.equal('Welcome to Ride My Way API v1');
+        });
+      done();
+    });
+  });
+
   describe('GET all rides api/v1/rides', () => {
     it('should get all ride offers', (done) => {
       chai

@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
   res.status(200).json('Welcome to Ride My Way!');
 });
 
+app.get('/api/v1', (req, res) => {
+  res.status(200).json('Welcome to Ride My Way API v1');
+});
+
 const port = process.env.PORT || 9000;
 app.listen(port);
 

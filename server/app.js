@@ -7,16 +7,16 @@ import router from './routes';
 const app = express();
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use('/', router);
-app.use('/api/v1', router);
+app.use('/', router);
 
-
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+app.get('/', (req, res) => {
+  res.send('Welcome to Ride My Way!');
 });
+
+const port = process.env.PORT || 9000;
+app.listen(port);
 
 export default app;

@@ -24,6 +24,14 @@ Required Features
 - Express
 - Mocha, Chai, Babel, eslint
 
+# Pivotal Tracker
+
+Project is currently being built with the Project Management Tool, Pivotal Tracker. You can find the template at
+https://www.pivotaltracker.com/n/projects/2178590
+
+#Template
+UI template is hosted at https://tomiadebanjo.github.io/ride-my-way/UI
+
 ## API Endpoints
 
 | Endpoint                       | Functionality                 |
@@ -44,7 +52,9 @@ git clone https://github.com/tomiadebanjo/ride-my-way.git
 npm install
 
 #serve in development environment
-npm run dev
+npm run dev to use Nodemon
+
+Nodemon watches for file changes and restarts your code.
 
 # build for production
 
@@ -52,8 +62,18 @@ npm run build
 
 ## Testing
 
-npm run test
+Prerequisites
+
+- <a href="https://getpostman.com/">Postman</a>
+
+Testing with Postman
+
+- Navigate to localhost:9000 in postman.
+
+Testing with coverage data
+
+- npm run test
 
 ## AUTHOR
 
-[Tomi Adebanjo]
+Tomi Adebanjo

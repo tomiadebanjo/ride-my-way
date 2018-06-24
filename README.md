@@ -32,6 +32,9 @@ https://www.pivotaltracker.com/n/projects/2178590
 #Template
 UI template is hosted at https://tomiadebanjo.github.io/ride-my-way/UI
 
+#API v1 url
+API v1 is hosted at https://ride-my-way-zaz.herokuapp.com
+
 ## API Endpoints
 
 | Endpoint                       | Functionality                 |

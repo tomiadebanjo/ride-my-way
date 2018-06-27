@@ -78,6 +78,7 @@ describe('API endpoints test', () => {
         destination: 'Ikeja',
         pickUpLocation: 'Surulere',
         departureTime: '9:00AM',
+        departureDate: '30/6/2018',
       };
       chai
         .request(server)

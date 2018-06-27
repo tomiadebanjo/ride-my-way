@@ -4,4 +4,4 @@ Ride-my-way is a carpooling application that provides drivers with the ability t
 
 # Github Pages Url
 
-https://tomiadebanjo.github.io/ride-my-way/UI
+https://tomiadebanjo.github.io/ride-my-way/

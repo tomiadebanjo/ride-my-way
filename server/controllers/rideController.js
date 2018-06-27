@@ -7,17 +7,17 @@ const rideOffers = db;
 const getAllRides = (req, res) => {
   res.status(200).json({
     message: 'success',
-    Rides: rideOffers,
+    rides: rideOffers,
   });
 };
 
 // Get a single ride
 const getOneRide = (req, res) => {
-  const id = parseInt(req.params.rideId, 10);
+  const id = Number(req.params.rideId);
   const rideOffer = rideOffers.find(ride => ride.rideId === id);
   if (rideOffer === undefined) {
     return res.status(404).json({
-      message: `Ride with id - ${id} not found`,
+      message: `Ride with id - ${id} not found, Please enter a valid ride Id`,
     });
   }
   return res.status(200).json({
@@ -29,7 +29,7 @@ const getOneRide = (req, res) => {
 const createRideOffer = (req, res) => {
   // new ride Object
   const newRide = {
-    id: rideOffers.length + 1,
+    rideId: rideOffers.length + 1,
     driver: req.body.driver,
     destination: req.body.destination,
     pickUpLocation: req.body.pickUpLocation,
@@ -44,7 +44,7 @@ const createRideOffer = (req, res) => {
     || !newRide.departureTime
   ) {
     return res.status(400).send({
-      error: 'Error!! check required fields',
+      error: 'Error!! check required fields, check api documentation for required fields',
     });
   }
   rideOffers.push(newRide);
@@ -59,7 +59,7 @@ const joinRide = (req, res) => {
   const rideOffer = rideOffers.find(ride => ride.rideId === id);
   if (rideOffer === undefined) {
     return res.status(404).json({
-      message: `Ride with id - ${id} not found`,
+      message: `Ride with id - ${id} not found, check all rides for available rides`,
     });
   }
   const rideRequest = {
@@ -68,7 +68,7 @@ const joinRide = (req, res) => {
   };
   if (!rideRequest.riderName) {
     return res.status(400).json({
-      message: 'riderName required',
+      message: 'riderName is required',
     });
   }
   const requestedRide = rideOffers[id - 1];

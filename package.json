@@ -10,6 +10,7 @@
     "start": "node dist/app.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel server -d dist --presets es2015,stage-2",
+    "heroku-postbuild": "npm run build",
     "serve": "node dist/app.js"
   },
   "repository": {

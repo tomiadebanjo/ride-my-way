@@ -5,6 +5,7 @@ const db = [
     destination: 'ikeja',
     pickUpLocation: 'gbagada',
     departureTime: '9:00AM',
+    departureDate: '21/12/2017',
     requests: [],
   },
   {
@@ -13,6 +14,7 @@ const db = [
     destination: 'Surulere',
     pickUpLocation: 'mushin',
     departureTime: '11:00AM',
+    departureDate: '20/12/2017',
     requests: [],
   },
   {
@@ -21,6 +23,7 @@ const db = [
     destination: 'ikoyi',
     pickUpLocation: 'Ijesha',
     departureTime: '9:00AM',
+    departureDate: '19/12/2017',
     requests: [],
   },
 ];

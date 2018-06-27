@@ -34,6 +34,7 @@ const createRideOffer = (req, res) => {
     destination: req.body.destination,
     pickUpLocation: req.body.pickUpLocation,
     departureTime: req.body.departureTime,
+    departureDate: req.body.departureDate,
     requests: [],
   };
   // Validate Ride details
@@ -42,6 +43,7 @@ const createRideOffer = (req, res) => {
     || !newRide.destination
     || !newRide.pickUpLocation
     || !newRide.departureTime
+    || !newRide.departureDate
   ) {
     return res.status(400).send({
       error: 'Error!! check required fields',

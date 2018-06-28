@@ -52,7 +52,9 @@ describe('API endpoints test', () => {
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res).to.be.an('Object');
-          expect(res.body.message).to.contain('Ride with id - 0 not found');
+          expect(res.body.message).to.contain(
+            'Ride with id - 0 not found, Please enter a valid ride Id',
+          );
         });
       done();
     });
@@ -103,7 +105,9 @@ describe('API endpoints test', () => {
         .send(newRide)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.error).to.contain('Error!! check required fields');
+          expect(res.body.error).to.contain(
+            'Error!! check required fields, check api documentation for required fields',
+          );
         });
       done();
     });
@@ -128,17 +132,19 @@ describe('API endpoints test', () => {
         .send({})
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.contain('riderName required');
+          expect(res.body.message).to.contain('riderName is required');
         });
       done();
     });
-    it('should return a 400 status code if rider name is missing', (done) => {
+    it('should return a 404 status code if rider id invalid', (done) => {
       chai
         .request(server)
         .post('/api/v1/rides/0/requests')
         .end((err, res) => {
           expect(res.status).to.equal(404);
-          expect(res.body.message).to.contain('Ride with id - 0 not found');
+          expect(res.body.message).to.contain(
+            'Ride with id - 0 not found, check all rides for available rides',
+          );
         });
       done();
     });

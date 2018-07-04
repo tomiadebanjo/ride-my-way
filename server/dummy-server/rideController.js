@@ -1,4 +1,4 @@
-import db from '../models/ridedb';
+import db from './models/ridedb';
 
 const rideOffers = db;
 

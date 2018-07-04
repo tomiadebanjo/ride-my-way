@@ -2,24 +2,26 @@ import express from 'express';
 import rideController from '../dummy-server/rideController';
 import rideControl from '../controllers/rideControl';
 import signUpController from '../controllers/userController';
-import requestController from '../controllers/requestController';
+import reqController from '../controllers/requestController';
 import authController from '../middleware/authController';
 
 const router = express.Router();
 
-router.post('/auth/signup', signUpController.signUp);
+router.post('/api/v1/auth/signup', signUpController.signUp);
 
-router.post('/auth/login', signUpController.login);
+router.post('/api/v1/auth/login', signUpController.login);
 
-router.get('/rides', authController.auth, rideControl.getAllRides);
+router.get('/api/v1/rides', authController.auth, rideControl.getAllRides);
 
-router.get('/rides/:rideId', authController.auth, rideControl.singleRide);
+router.get('/api/v1/rides/:rideId', authController.auth, rideControl.singleRide);
 
-router.post('/rides/:rideId/requests', authController.auth, requestController.requestRide);
+router.post('/api/v1/rides/:rideId/requests', authController.auth, reqController.requestRide);
 
-router.post('/users/rides', authController.auth, rideControl.newRide);
+router.post('/api/v1/users/rides', authController.auth, rideControl.newRide);
 
-router.get('/users/rides/:rideId/requests', authController.auth, requestController.rideRequests);
+router.get('/api/v1/users/rides/:rideId/requests', authController.auth, reqController.rideRequests);
+
+router.put('/api/v1/users/rides/:rideId/requests/:requestId', authController.auth, reqController.updateRequest);
 
 // Dummy server routes
 router.get('/api/v1/rides', rideController.getAllRides);

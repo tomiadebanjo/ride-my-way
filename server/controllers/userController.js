@@ -36,7 +36,7 @@ const login = (req, res) => {
   const text = 'SELECT * FROM users WHERE email = $1';
   const values = [req.body.email];
   pool.query(text, values, (err, result) => {
-    if (!result) {
+    if (result.rows === undefined || result.rows.length === 0) {
       return res.status(404).json({
         success: false,
         message: `${err} User not found`,

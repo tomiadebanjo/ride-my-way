@@ -12,6 +12,8 @@ router.post('/auth/login', signUpController.login);
 
 router.post('/users/rides', authController.auth, rideControl.newRide);
 
+router.get('/users/rides/:rideId', authController.auth, rideControl.singleRide);
+
 router.get('/api/v1/rides', rideController.getAllRides);
 
 router.get('/api/v1/rides/:rideId', rideController.getOneRide);

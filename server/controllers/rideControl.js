@@ -16,8 +16,6 @@ const newRide = (req, res) => {
         message: err,
       });
     }
-    console.log(result.rows);
-    console.log(result.rows[0]);
     return res.status(201).json({
       success: true,
       message: 'Ride created successfully',
@@ -26,6 +24,25 @@ const newRide = (req, res) => {
   });
 };
 
+const singleRide = (req, res) => {
+  const text = 'SELECT * FROM rides WHERE id = $1';
+  const values = [Number(req.params.rideId)];
+  pool.query(text, values, (err, result) => {
+    if (result.rows === undefined || result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: `${err} Ride not found!! Enter a valid ride ID`,
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'Ride Found',
+      rideDetails: result.rows[0],
+    });
+  });
+};
+
 export default {
   newRide,
+  singleRide,
 };

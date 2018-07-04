@@ -2,6 +2,7 @@ import express from 'express';
 import rideController from '../dummy-server/rideController';
 import rideControl from '../controllers/rideControl';
 import signUpController from '../controllers/userController';
+import requestController from '../controllers/requestController';
 import authController from '../middleware/authController';
 
 const router = express.Router();
@@ -13,6 +14,8 @@ router.post('/auth/login', signUpController.login);
 router.get('/rides', authController.auth, rideControl.getAllRides);
 
 router.get('/rides/:rideId', authController.auth, rideControl.singleRide);
+
+router.post('/rides/:rideId/requests', authController.auth, requestController.requestRide);
 
 router.post('/users/rides', authController.auth, rideControl.newRide);
 

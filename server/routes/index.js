@@ -19,6 +19,9 @@ router.post('/rides/:rideId/requests', authController.auth, requestController.re
 
 router.post('/users/rides', authController.auth, rideControl.newRide);
 
+router.get('/users/rides/:rideId/requests', authController.auth, requestController.rideRequests);
+
+// Dummy server routes
 router.get('/api/v1/rides', rideController.getAllRides);
 
 router.get('/api/v1/rides/:rideId', rideController.getOneRide);

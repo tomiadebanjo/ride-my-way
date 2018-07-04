@@ -1,4 +1,3 @@
-// import Joi from 'joi';
 import db from '../models/ridedb';
 
 const rideOffers = db;

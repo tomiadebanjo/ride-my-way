@@ -21,6 +21,8 @@ app.get('/api/v1', (req, res) => {
 });
 
 const port = process.env.PORT || 9000;
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
 
 export default app;

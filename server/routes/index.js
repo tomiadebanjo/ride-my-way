@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.post('/auth/signup', signUpController.signUp);
 
+router.post('/auth/login', signUpController.login);
+
 router.get('/api/v1/rides', rideController.getAllRides);
 
 router.get('/api/v1/rides/:rideId', rideController.getOneRide);

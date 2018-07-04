@@ -10,9 +10,11 @@ router.post('/auth/signup', signUpController.signUp);
 
 router.post('/auth/login', signUpController.login);
 
-router.post('/users/rides', authController.auth, rideControl.newRide);
+router.get('/rides', authController.auth, rideControl.getAllRides);
 
-router.get('/users/rides/:rideId', authController.auth, rideControl.singleRide);
+router.get('/rides/:rideId', authController.auth, rideControl.singleRide);
+
+router.post('/users/rides', authController.auth, rideControl.newRide);
 
 router.get('/api/v1/rides', rideController.getAllRides);
 

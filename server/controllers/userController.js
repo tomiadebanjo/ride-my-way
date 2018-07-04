@@ -14,7 +14,7 @@ const signUp = (req, res) => {
     if (err) {
       return res.status(500).json({
         success: false,
-        message: err,
+        message: err.message,
       });
     }
     const token = jwt.sign(
@@ -39,7 +39,7 @@ const login = (req, res) => {
     if (result.rows === undefined || result.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: `${err} User not found`,
+        message: `${err.message} User not found`,
       });
     }
 

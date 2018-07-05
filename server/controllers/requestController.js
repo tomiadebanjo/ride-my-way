@@ -6,9 +6,9 @@ const requestRide = (req, res) => {
   const values = [requestStatus, req.userId, Number(req.params.rideId)];
   pool.query(text, values, (err, response) => {
     if (err) {
-      const duplicateKeyError = 'duplicate key value violates unique constraint "ride_request_userid_rideid_key"';
-      if (err.message === duplicateKeyError) {
-        return res.status(409).json({
+      const duplicateKeyError = 'ride_request_userid_rideid_key"';
+      if (err.message.search(duplicateKeyError) !== -1) {
+        return res.status(500).json({
           success: false,
           message: 'Error: You can only request for a ride once',
         });

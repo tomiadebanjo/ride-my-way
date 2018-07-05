@@ -12,9 +12,16 @@ const signUp = (req, res) => {
   const values = [req.body.fullName, req.body.email, hashedPassword];
   pool.query(text, values, (err, result) => {
     if (err) {
+      const duplicateKeyError = 'users_email_key"';
+      if (err.message.search(duplicateKeyError) !== -1) {
+        return res.status(500).json({
+          success: false,
+          message: 'Error: User already exists with that email address',
+        });
+      }
       return res.status(500).json({
         success: false,
-        message: err.message,
+        message: 'Bad request',
       });
     }
     const token = jwt.sign(

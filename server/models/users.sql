@@ -1,8 +1,3 @@
-DROP DATABASE IF EXISTS ridemyway;
-CREATE DATABASE ridemyway;
-
-\c ridemyway
-
 CREATE TABLE users(
     id serial PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,

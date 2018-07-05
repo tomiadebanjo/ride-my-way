@@ -16,6 +16,7 @@
     "build": "babel server -d dist --presets es2015,stage-2",
     "migrate": "psql -U postgres -f server/models/index.sql",
     "heroku-postbuild": "npm run build",
+    "postdeploy": "psql -U postgres -f server/models/index.sql",
     "serve": "node dist/app.js"
   },
   "repository": {

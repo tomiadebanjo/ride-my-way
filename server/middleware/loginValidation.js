@@ -21,7 +21,7 @@ const login = (req, res, next) => {
   if (!charTest.test(req.body.password)) {
     return res.status(400).send({
       success: 'false',
-      message: 'password must contain at least 1 aplahabet',
+      message: 'password must contain at least 1 alphabet',
     });
   }
   if (req.body.email === '' || !emailRegex.test(req.body.email)) {
@@ -30,7 +30,7 @@ const login = (req, res, next) => {
       message: 'Please enter a valid email address',
     });
   }
-  return next();
+  next();
 };
 
 export default {

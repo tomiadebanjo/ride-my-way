@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint server --fix",
     "dev": "nodemon server/app.js --exec babel-node",
-    "test": "nyc mocha --require babel-register server/test/* --exit",
+    "test": "nyc mocha --require babel-register server/test/index.test.js --exit",
     "start": "node dist/app.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel server -d dist --presets es2015,stage-2",

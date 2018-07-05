@@ -1,2 +1,2 @@
 require('./users.test');
-require('./ride.test');
+// require('./ride.test');

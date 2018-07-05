@@ -38,22 +38,4 @@ router.put(
   reqController.updateRequest,
 );
 
-// Dummy server routes
-router.get('/api/v1/rides', rideController.getAllRides);
-
-router.get('/api/v1/rides/:rideId', rideController.getOneRide);
-
-router.post('/api/v1/rides', rideController.createRideOffer);
-
-router.post('/api/v1/rides/:rideId/requests', rideController.joinRide);
-
-// Catch all other routes
-router.get('*', (req, res) => res.status(400).json({
-  message: 'Invalid Route',
-}));
-
-router.post('*', (req, res) => res.status(400).json({
-  message: 'Invalid Route',
-}));
-
 export default router;

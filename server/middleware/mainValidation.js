@@ -65,7 +65,7 @@ const newRide = (req, res, next) => {
     });
   }
   if (
-    req.body.body.departureDate === ''
+    req.body.departureDate === ''
     || typeof req.body.departureDate === 'undefined'
     || req.body.departureDate === null
   ) {
@@ -80,7 +80,7 @@ const newRide = (req, res, next) => {
       message: 'Invalid Date format.. enter required format - dd/mm/yyyy e.g:- 10/05/2018',
     });
   }
-  return next();
+  next();
 };
 
 const validateId = (req, res, next) => {
@@ -96,12 +96,11 @@ const validateId = (req, res, next) => {
   if (!Number.isInteger(requestId)) {
     return res.status(400).send({
       success: 'false',
-      message: 'Invalid ride id!!',
+      message: 'Invalid request id!!',
     });
   }
-  return next();
+  next();
 };
-
 
 export default {
   newRide,

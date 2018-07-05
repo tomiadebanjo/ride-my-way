@@ -14,7 +14,7 @@ const signUp = (req, res) => {
     if (err) {
       const duplicateKeyError = 'users_email_key"';
       if (err.message.search(duplicateKeyError) !== -1) {
-        return res.status(500).json({
+        return res.status(409).json({
           success: false,
           message: 'Error: User already exists with that email address',
         });

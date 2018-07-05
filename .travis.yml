@@ -4,13 +4,18 @@ node_js:
 cache:
   directories:
     - "node_modules"
+services:
+  - postgresql
 env:
   global:
     - CC_TEST_REPORTER_ID=c47c7c09e7b911ae93528bb6e3ff656811ca64753dc5289eddee481d4ca1ab6a
 before_script:
+  - psql -c 'create database ridemyway;' -U postgres
+  - psql -c "CREATE USER postgres WITH PASSWORD 'postgres';" -U postgres 
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+
 script:
   - nyc --reporter=lcov npm run test
 after_script:

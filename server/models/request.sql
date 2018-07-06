@@ -4,7 +4,7 @@ CREATE TYPE request_status_allowed AS ENUM (
     'rejected'
 );
 
-CREATE TABLE ride_request (
+CREATE TABLE IF NOT EXISTS ride_request (
     id SERIAL PRIMARY KEY,
     request_status request_status_allowed NOT NULL,
     userId INTEGER REFERENCES users(id),

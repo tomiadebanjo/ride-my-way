@@ -24,13 +24,29 @@ Required Features
 - Express
 - Mocha, Chai, Babel, eslint
 
+# Functionalities
+
+## New Users
+* Create an account
+* Sign in as a user
+
+## Registered Users
+* View profile
+* View all ride offers
+* Create New ride offer
+* View a specific ride offer
+* Make a request to a ride offer
+* View request to a ride offer
+* Reject a request to a ride offer
+* Accept a request to a ride offer
+
 # Pivotal Tracker
 
 Project is currently being built with the Project Management Tool, Pivotal Tracker. You can find the template at
 https://www.pivotaltracker.com/n/projects/2178590
 
 #Template
-UI template is hosted at https://tomiadebanjo.github.io/ride-my-way/UI
+UI template is hosted at https://tomiadebanjo.github.io/ride-my-way/
 
 #API v1 url
 API v1 is hosted at https://ride-my-way-zaz.herokuapp.com
@@ -39,10 +55,14 @@ API v1 is hosted at https://ride-my-way-zaz.herokuapp.com
 
 | Endpoint                       | Functionality                 |
 | ------------------------------ | ----------------------------- |
-| GET /rides                     | Fetch all rides               |
+| POST /auth/signup              | Register a user               |
+| POST /auth/login               | Login a user                  |
+| GET /rides                     | Fetch all available rides     |
 | GET /rides/\<rideId>           | Fetch a single ride offer     |
-| POST /rides                    | Create a Ride offer           |
-| POST /rides/\<rideId>/requests | Make a request to join a ride |
+| POST /users/rides              | Create a Ride offer           |
+| POST /rides/:rideId/requests   | Make a request to join a ride |
+| GET /users/rides/:rideId/requests | Register a user            |
+| PUT /users/rides/:rideId/requests/:requestId | Accept or reject a ride request |
 
 ## Build Setup
 
@@ -77,6 +97,17 @@ Testing with coverage data
 
 - npm run test
 
+## contributions to the project 
+* Fork this repository to your github account
+* Clone the repository - git clone https://github.com/{your_username_goes_here}/ride-my-way.git
+* Create your feature branch - git checkout -b {feature, chore or bug}-short_feature_description
+* Commit your changes - git commit -m “{commit_message_goes_here}“ or git commit for the interactive interface
+* Push to the remote branch - git push origin {your_branch_name_as_described_above}
+* Open a pull request
+
 ## AUTHOR
 
 Tomi Adebanjo
+
+## License 
+This is licensed for your use, modification and distribution under the [MIT license.](https://opensource.org/licenses/MIT)

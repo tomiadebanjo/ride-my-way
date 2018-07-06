@@ -33,7 +33,6 @@ const signUp = (req, res) => {
     );
     return res.status(201).json({
       message: 'User registration successful',
-      result: result.rows[0],
       token,
     });
   });
@@ -46,7 +45,7 @@ const login = (req, res) => {
     if (result.rows === undefined || result.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: `${err.message} User not found`,
+        message: 'User not found',
       });
     }
 
@@ -54,8 +53,7 @@ const login = (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid Password',
-        token: null,
+        data: 'Invalid credentials',
       });
     }
     const token = jwt.sign(

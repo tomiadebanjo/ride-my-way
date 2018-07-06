@@ -5,6 +5,12 @@ const requestRide = (req, res) => {
   const requestStatus = 'pending';
   const values = [requestStatus, req.userId, Number(req.params.rideId)];
   pool.query(text, values, (err, response) => {
+    if (Number(req.userId) === Number(response.rows[0].userid)) {
+      return res.status(409).json({
+        success: false,
+        message: 'you can not make a request to join a ride you created',
+      });
+    }
     if (err) {
       const duplicateKeyError = 'ride_request_userid_rideid_key"';
       if (err.message.search(duplicateKeyError) !== -1) {
@@ -29,10 +35,16 @@ const rideRequests = (req, res) => {
   const text = 'SELECT * FROM ride_request WHERE rideId = $1';
   const values = [Number(req.params.rideId)];
   pool.query(text, values, (err, response) => {
+    if (Number(req.userId) === Number(response.rows[0].userid)) {
+      return res.status(409).json({
+        success: false,
+        message: 'you can only get ride requests for rides you created',
+      });
+    }
     if (response.rows === undefined || response.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: `${err.message} Enter valid Id`,
+        message: 'Enter valid Id',
       });
     }
     return res.status(200).json({
@@ -50,12 +62,11 @@ const updateRequest = (req, res) => {
     if (response.rows === undefined || response.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: `${err}.. Ride Not found`,
+        message: 'Ride Not found',
       });
     }
     const textQuery = 'UPDATE ride_request SET request_status = $1 , updated_at = Now() WHERE userId = $2 AND rideId = $3 returning *';
     const queryValues = [req.body.response, req.userId, Number(req.params.rideId)];
-    console.log(req.body.response);
     pool.query(textQuery, queryValues, (err, response) => {
       if (response.rows === undefined || response.rows.length === 0) {
         return res.status(400).json({

@@ -83,16 +83,19 @@ const newRide = (req, res, next) => {
   next();
 };
 
-const validateId = (req, res, next) => {
+const validateRideId = (req, res, next) => {
   const rideId = Number(req.params.rideId);
-  const requestId = Number(req.params.requestId);
   if (!Number.isInteger(rideId)) {
     return res.status(400).send({
       success: 'false',
       message: 'Invalid ride id!!',
     });
   }
+  next();
+};
 
+const validateRequestId = (req, res, next) => {
+  const requestId = Number(req.params.requestId);
   if (!Number.isInteger(requestId)) {
     return res.status(400).send({
       success: 'false',
@@ -102,7 +105,9 @@ const validateId = (req, res, next) => {
   next();
 };
 
+
 export default {
   newRide,
-  validateId,
+  validateRideId,
+  validateRequestId,
 };

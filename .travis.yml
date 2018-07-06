@@ -10,7 +10,6 @@ env:
   global:
     - CC_TEST_REPORTER_ID=c47c7c09e7b911ae93528bb6e3ff656811ca64753dc5289eddee481d4ca1ab6a
 before_script:
-  - npm run migrate
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build

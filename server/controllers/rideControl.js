@@ -13,13 +13,13 @@ const newRide = (req, res) => {
     if (err) {
       return res.status(500).json({
         success: false,
-        message: 'Bad request',
+        message: 'Internal server error',
       });
     }
     return res.status(201).json({
       success: true,
       message: 'Ride created successfully',
-      result: result.rows[0],
+      data: result.rows[0],
     });
   });
 };
@@ -31,12 +31,12 @@ const singleRide = (req, res) => {
     if (result.rows === undefined || result.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Ride not found!! Enter a valid ride ID',
+        data: 'Ride not found!! Enter a valid ride ID',
       });
     }
     return res.status(200).json({
       success: true,
-      message: 'Ride Found',
+      data: 'Ride Found',
       rideDetails: result.rows[0],
     });
   });
@@ -48,12 +48,12 @@ const getAllRides = (req, res) => {
     if (err) {
       return res.status(500).json({
         success: false,
-        message: err.message,
+        message: 'Internal server error',
       });
     }
     return res.status(200).json({
       success: true,
-      Rides: response.rows,
+      rides: response.rows,
     });
   });
 };

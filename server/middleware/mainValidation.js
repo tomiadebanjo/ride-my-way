@@ -4,6 +4,13 @@ const newRide = (req, res, next) => {
   const timeTest = /^(([0-1]{0,1}[0-9])|(2[0-3])):[0-5]{0,1}[0-9]$/g;
   const dateTest = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
 
+  if (!req.body.destination && !req.body.pickUpLocation && !req.body.departureDate && !req.body.departureTime) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'Check required fields',
+    });
+  }
+
   if (
     req.body.destination === ''
     || typeof req.body.destination === 'undefined'

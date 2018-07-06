@@ -10,7 +10,6 @@ describe('default route test /', () => {
     request(server)
       .get('/')
       .end((err, res) => {
-        
         expect(res.status).to.equal(200);
         expect(res.body).to.equal('Welcome to Ride My Way!');
       });
@@ -23,6 +22,7 @@ describe('api v1 route /api/v1', () => {
     request(server)
       .get('/api/v1')
       .end((err, res) => {
+        console.log(res.body);
         expect(res.status).to.equal(200);
         expect(res.body).to.equal('Welcome to Ride My Way API v1');
       });
@@ -41,7 +41,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/signup')
       .send(emptyFullName)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('fullName is required');
       });
@@ -57,7 +56,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/signup')
       .send(emptyFullName1)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('fullName must contain at least one alphabet');
       });
@@ -73,7 +71,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/signup')
       .send(emptyFullName2)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain(
           'fullName must be alphabetic, the use of spaces and - are allowed',
@@ -91,7 +88,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/signup')
       .send(emptyPassword)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('password is required');
       });
@@ -107,7 +103,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/signup')
       .send(emptyPassword1)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('Minimum password length is 6');
       });
@@ -123,7 +118,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/signup')
       .send(emptyPassword2)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('password must contain at least 1 alphabet');
       });
@@ -139,7 +133,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/signup')
       .send(emptyEmail)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('Please enter a valid email address');
       });
@@ -156,7 +149,6 @@ describe('sign-up route test', () => {
       .set('Content-Type', 'application/json')
       .send(newUser)
       .end((err, res) => {
-        
         expect(res.status).to.equal(201);
         expect(res.body.message).to.contain('User registration successful');
         done();
@@ -174,7 +166,6 @@ describe('sign-up route test', () => {
       .set('Content-Type', 'application/json')
       .send(newUser)
       .end((err, res) => {
-     
         expect(res.status).to.equal(409);
         expect(res.body.message).to.contain('Error: User already exists with that email address');
         done();
@@ -191,7 +182,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/login')
       .send(emptyPassword)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('password is required');
       });
@@ -207,7 +197,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/login')
       .send(emptyPassword1)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('Minimum password length is 6');
       });
@@ -223,7 +212,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/login')
       .send(emptyPassword2)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('password must contain at least 1 alphabet');
       });
@@ -239,7 +227,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/login')
       .send(emptyEmail)
       .end((err, res) => {
-        
         expect(res.status).to.equal(400);
         expect(res.body.message).to.contain('Please enter a valid email address');
       });
@@ -254,7 +241,6 @@ describe('sign-up route test', () => {
       .post('/api/v1/auth/login')
       .send(userLogin)
       .end((err, res) => {
-        
         expect(res.status).to.equal(401);
         expect(res.body.data).to.contain('Invalid credentials');
         done();
@@ -270,7 +256,6 @@ describe('sign-up route test', () => {
       .set('Content-Type', 'application/json')
       .send(userLogin1)
       .end((err, res) => {
-        
         authToken = res.body.token;
         expect(res.status).to.equal(200);
         expect(res).to.be.an('Object');
@@ -288,7 +273,6 @@ describe('sign-up route test', () => {
       .set('Content-Type', 'application/json')
       .send(userLogin1)
       .end((err, res) => {
-        
         expect(200);
         expect(res.body.token);
         expect(res.body.message).to.eql('Welcome Suki boko, Login Successful');
@@ -303,7 +287,6 @@ describe('rides test', () => {
       .post('/api/v1/users/rides')
       .set('authorization', '')
       .end((err, res) => {
-        
         expect(res.status).to.equal(401);
         expect(res.body.message).to.contain('No token provided');
         done();
@@ -314,7 +297,6 @@ describe('rides test', () => {
       .post('/api/v1/users/rides')
       .set('authorization', 'sdsjdksj')
       .end((err, res) => {
-        
         expect(res.status).to.equal(500);
         expect(res.body.message).to.contain('Failed to authenicate token! Valid token required');
         done();
@@ -333,7 +315,6 @@ describe('rides test', () => {
         .send(emptyDestination)
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('destination field is required');
         });
@@ -351,7 +332,6 @@ describe('rides test', () => {
         .send(emptyDestination1)
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('destination must contain at least one alphabet');
         });
@@ -370,7 +350,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(emptyDestination1)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain(
             'destination must be alphabetic, the use of spaces and "-" are allowed',
@@ -390,7 +369,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(emptypickUpLocation)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('pickUpLocation field is required');
         });
@@ -408,7 +386,6 @@ describe('rides test', () => {
         .send(emptypickUpLocation1)
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('pickUpLocation must contain at least one alphabet');
         });
@@ -427,7 +404,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(emptypickUpLocation2)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain(
             'pickUpLocation must be alphabetic, the use of spaces and "-" are allowed',
@@ -447,7 +423,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(emptydepartureTime)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('departureTime field is required');
         });
@@ -465,7 +440,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(emptydepartureTime2)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain(
             'Invalid time format.. enter required format - hh:mm e.g:- 16:40',
@@ -485,7 +459,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(emptydepartureDate)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('departureDate field is required');
         });
@@ -503,7 +476,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(emptydepartureDate2)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain(
             'Invalid Date format.. enter required format - dd/mm/yyyy e.g:- 10/05/2018',
@@ -523,7 +495,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(newRide)
         .end((err, res) => {
-          
           expect(res.status).to.equal(201);
           expect(res.body.message).to.contain('Ride created successfully');
         });
@@ -542,7 +513,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(newRide)
         .end((err, res) => {
-          
           expect(res.status).to.equal(500);
         });
       done();
@@ -552,7 +522,6 @@ describe('rides test', () => {
         .post('/api/v1/rides/0/requests')
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('Invalid ride id!!');
         });
@@ -564,7 +533,6 @@ describe('rides test', () => {
         .put('/api/v1/users/rides/1/requests/0')
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('Invalid request id!!');
         });
@@ -576,7 +544,6 @@ describe('rides test', () => {
         .get('/api/v1/rides')
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(200);
           expect(res.body.success).to.contain(true);
         });
@@ -588,7 +555,6 @@ describe('rides test', () => {
         .get('/api/v1/rides/1')
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(200);
           expect(res.body.data).to.contain('Ride Found');
         });
@@ -600,7 +566,6 @@ describe('rides test', () => {
         .get('/api/v1/rides/999')
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(404);
           expect(res.body.data).to.contain('Ride not found!! Enter a valid ride ID');
         });
@@ -612,7 +577,6 @@ describe('rides test', () => {
         .post('/api/v1/rides/1/requests')
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(409);
           expect(res.body.message).to.contain(
             'you can not make a request to join a ride you created',
@@ -625,7 +589,6 @@ describe('rides test', () => {
         .post('/api/v1/rides/2300/requests')
         .set('authorization', authToken)
         .end((err, res) => {
-          
           expect(res.status).to.equal(500);
           expect(res.body.message).to.contain('Ride with that id not found');
         });
@@ -638,7 +601,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(response)
         .end((err, res) => {
-          
           expect(res.status).to.equal(400);
           expect(res.body.message).to.contain('Bad Request confirm rideId');
         });
@@ -651,7 +613,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(response)
         .end((err, res) => {
-          
           expect(res.status).to.equal(404);
           expect(res.body.message).to.contain(
             'Please enter one the required responses - [accepted, rejected, pending]',
@@ -666,7 +627,6 @@ describe('rides test', () => {
         .set('authorization', authToken)
         .send(response)
         .end((err, res) => {
-          
           expect(res.status).to.equal(202);
           expect(res.body.message).to.contain(
             ' Ride request status updated, status - accepted',

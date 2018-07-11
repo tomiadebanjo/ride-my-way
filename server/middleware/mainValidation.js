@@ -112,7 +112,6 @@ const validateRequestId = (req, res, next) => {
   next();
 };
 
-
 export default {
   newRide,
   validateRideId,

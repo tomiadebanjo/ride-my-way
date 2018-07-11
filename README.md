@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tomiadebanjo/ride-my-way.svg?branch=develop)](https://travis-ci.org/tomiadebanjo/ride-my-way) [![Coverage Status](https://coveralls.io/repos/github/tomiadebanjo/ride-my-way/badge.svg?branch=develop)](https://coveralls.io/github/tomiadebanjo/ride-my-way?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/6a77aac0d9e850e8ffdd/maintainability)](https://codeclimate.com/github/tomiadebanjo/ride-my-way/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/6a77aac0d9e850e8ffdd/test_coverage)](https://codeclimate.com/github/tomiadebanjo/ride-my-way/test_coverage)
 
+
 Ride-my-way is a carpooling application that provides drivers with the ability to create ride offers and passengers to join available ride offers
 
 Required Features

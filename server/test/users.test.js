@@ -204,6 +204,7 @@ describe('sign-up route test', () => {
   it('should throw Error: User already exists with that email address', (done) => {
     const newUser = {
       fullName: 'Suki boko',
+
       email: 'suki@gmail.com',
       password: 'postgres',
     };
@@ -212,6 +213,7 @@ describe('sign-up route test', () => {
       .set('Content-Type', 'application/json')
       .send(newUser)
       .end((err, res) => {
+
         expect(res.status).to.equal(409);
         expect(res.body.message).to.contain('Error: User already exists with that email address');
         done();

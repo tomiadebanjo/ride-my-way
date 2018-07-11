@@ -33,8 +33,10 @@ router.get(
 router.put(
   '/api/v1/users/rides/:rideId/requests/:requestId',
   authController.auth,
+  validation.validateRideId,
   validation.validateRequestId,
   reqController.updateRequest,
 );
+
 
 export default router;

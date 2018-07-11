@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
   }
   jwt.verify(token, secret, (err, decoded) => {
     if (err) {
-      return res.status(500).send({
+      return res.status(401).send({
         auth: false,
         message: 'Failed to authenicate token! Valid token required',
       });

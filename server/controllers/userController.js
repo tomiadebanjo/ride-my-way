@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import pool from '../models/dbconfig';
 
-dotenv.config();
+
 const secret = process.env.SECRET;
 
 const signUp = (req, res) => {
@@ -21,7 +21,7 @@ const signUp = (req, res) => {
       }
       return res.status(500).json({
         success: false,
-        message: 'Bad request',
+        message: 'Internal server error',
       });
     }
     const token = jwt.sign(
@@ -29,7 +29,7 @@ const signUp = (req, res) => {
         id: result.rows[0].id,
       },
       secret,
-      { expiresIn: 3600 },
+      { expiresIn: 7200 },
     );
     return res.status(201).json({
       message: 'User registration successful',
@@ -53,7 +53,7 @@ const login = (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).json({
         success: false,
-        data: 'Invalid credentials',
+        message: 'Invalid credentials',
       });
     }
     const token = jwt.sign(
@@ -61,7 +61,7 @@ const login = (req, res) => {
         id: result.rows[0].id,
       },
       secret,
-      { expiresIn: 3600 },
+      { expiresIn: 7200 },
     );
     const name = result.rows[0].full_name;
     return res.status(200).json({

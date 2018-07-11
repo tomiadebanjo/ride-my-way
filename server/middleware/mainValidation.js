@@ -4,6 +4,13 @@ const newRide = (req, res, next) => {
   const timeTest = /^(([0-1]{0,1}[0-9])|(2[0-3])):[0-5]{0,1}[0-9]$/g;
   const dateTest = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
 
+  if (!req.body.destination && !req.body.pickUpLocation && !req.body.departureDate && !req.body.departureTime) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'Check required fields',
+    });
+  }
+
   if (
     req.body.destination === ''
     || typeof req.body.destination === 'undefined'
@@ -83,16 +90,19 @@ const newRide = (req, res, next) => {
   next();
 };
 
-const validateId = (req, res, next) => {
+const validateRideId = (req, res, next) => {
   const rideId = Number(req.params.rideId);
-  const requestId = Number(req.params.requestId);
   if (!Number.isInteger(rideId)) {
     return res.status(400).send({
       success: 'false',
       message: 'Invalid ride id!!',
     });
   }
+  next();
+};
 
+const validateRequestId = (req, res, next) => {
+  const requestId = Number(req.params.requestId);
   if (!Number.isInteger(requestId)) {
     return res.status(400).send({
       success: 'false',
@@ -104,5 +114,6 @@ const validateId = (req, res, next) => {
 
 export default {
   newRide,
-  validateId,
+  validateRideId,
+  validateRequestId,
 };

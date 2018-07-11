@@ -1,4 +1,4 @@
-CREATE TABLE rides(
+CREATE TABLE IF NOT EXISTS rides(
     id serial PRIMARY KEY,
     userId INTEGER REFERENCES users(id),
     destination VARCHAR(255) NOT NULL,

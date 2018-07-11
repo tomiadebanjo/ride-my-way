@@ -92,6 +92,21 @@ describe('sign-up route test', () => {
         done();
       });
   });
+  it('should return error if fullName length is less than 6 characters', (done) => {
+    const emptyPassword1 = {
+      fullName: 'nds',
+      email: 'bukola@gmail.com',
+      password: 'buko',
+    };
+    request(server)
+      .post('/api/v1/auth/signup')
+      .send(emptyPassword1)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.message).to.contain('Your fullName must be at least 6 characters');
+        done();
+      });
+  });
   it('should return error if fullName contains space', (done) => {
     const emptyFullName1 = {
       fullName: '    aaaa     ',
@@ -150,7 +165,7 @@ describe('sign-up route test', () => {
       .send(emptyPassword1)
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        expect(res.body.message).to.contain('Minimum password length is 6');
+        expect(res.body.message).to.contain('Your password must be at least 6 characters');
         done();
       });
   });
@@ -674,7 +689,7 @@ describe('rides test', () => {
     describe('request ride test', () => {
       it('User login successful', (done) => {
         const userSignUp = {
-          fullName: 'yusuf',
+          fullName: 'yusuff',
           email: 'yusuf1@gmail.com',
           password: 'yusuf1',
         };

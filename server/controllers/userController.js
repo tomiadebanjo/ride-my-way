@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import pool from '../models/dbconfig';
 
-
+dotenv.config();
 const secret = process.env.SECRET;
 
 const signUp = (req, res) => {

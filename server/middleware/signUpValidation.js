@@ -39,6 +39,12 @@ const signUp = (req, res, next) => {
       message: 'fullName must contain at least one alphabet',
     });
   }
+  if (req.body.fullName.length < 6) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'Your fullName must be at least 6 characters',
+    });
+  }
   if (nonCharTest.test(req.body.fullName)) {
     return res.status(400).send({
       success: 'false',
@@ -65,7 +71,7 @@ const signUp = (req, res, next) => {
   if (req.body.password.length < 6) {
     return res.status(400).send({
       success: 'false',
-      message: 'Minimum password length is 6',
+      message: 'Your password must be at least 6 characters',
     });
   }
   if (!charTest.test(req.body.password)) {

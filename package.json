@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint server --fix",
     "dev": "nodemon server/app.js --exec babel-node",
-    "test": "npm run dropTable && nyc mocha --require babel-register server/test/users.test.js --timeout 10000 --exit",
+    "test": "npm run dropTable && nyc mocha --require babel-register server/test/main.test.js --timeout 10000 --exit",
     "start": "node dist/app.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel server -d dist --presets es2015,stage-2",

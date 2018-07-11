@@ -20,6 +20,10 @@ app.get('/api/v1', (req, res) => {
   res.status(200).json('Welcome to Ride My Way API v1');
 });
 
+app.all('*', (req, res) => res.status(404).json({
+  message: 'wrong endpoint: visit api with api/v1/signup',
+}));
+
 const port = process.env.PORT || 9000;
 app.listen(port);
 

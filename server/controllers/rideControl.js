@@ -1,7 +1,8 @@
 import pool from '../models/dbconfig';
 
 const newRide = (req, res) => {
-  const text = 'INSERT INTO rides (userId, destination, pickup_location, departure_time, departure_date, created_at) VALUES($1, $2, $3, $4, $5, Now()) returning *';
+  const text = `INSERT INTO rides (userId, destination, pickup_location, departure_time, departure_date, created_at) 
+  VALUES($1, $2, $3, $4, $5, Now()) returning *`;
   const values = [
     req.userId,
     req.body.destination,
@@ -31,12 +32,12 @@ const singleRide = (req, res) => {
     if (result.rows === undefined || result.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        data: 'Ride not found!! Enter a valid ride ID',
+        message: 'Ride not found!! Enter a valid ride ID',
       });
     }
     return res.status(200).json({
       success: true,
-      data: 'Ride Found',
+      message: 'Ride Found',
       rideDetails: result.rows[0],
     });
   });
@@ -53,6 +54,7 @@ const getAllRides = (req, res) => {
     }
     return res.status(200).json({
       success: true,
+      message: 'all available rides retrieved',
       rides: response.rows,
     });
   });

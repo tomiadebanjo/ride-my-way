@@ -11,5 +11,4 @@ pool.connect((err) => {
     console.log('DATABASE CONNECTED!');
   }
 });
-
 export default pool;

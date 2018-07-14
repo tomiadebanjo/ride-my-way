@@ -1,80 +1,233 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://ride-my-way-zaz.herokuapp.com/api/v1
 
-# ridemyway
+# RideMyWay API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Ride-my-way is a carpooling application that provides drivers with the ability to create ride offers and passengers to join available ride offers
 
-## Questions Collection [/questions]
+## Making a request
+An authorization token is required to access all endpoints except the signup and Login endpoints. Use the login/signup endpoint to get a token
 
-### List All Questions [GET]
+A token generated expires 48 hours after it has being generated.
 
-+ Response 200 (application/json)
+The token can be placed in `req.headers`
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+`authorization: eyJhbGciOiJIUzI1J9.eyJpZCIjoxNTMxNDI5ODM1fQ.9mQ7fPAGXmvlD7e4oJ2`
+>  You must replace `eyJhbGciOiJIUzI1J9.eyJpZCIjoxNTMxNDI5ODM1fQ.9mQ7fPAGXmvlD7e4oJ2` with your personal auth token.
 
-### Create a New Question [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+## Users [/auth]
 
+
+### Create a new user [POST /auth/signup]
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "fullName": "bigshot",
+            "email": "bigshot2019@gmail.com",
+            "password": "bigshot1234"
         }
 
 + Response 201 (application/json)
 
-    + Headers
+        {
+            "message": "User registration successful",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImlhdCI6MTUzMTQyMjYzNSwiZXhwIjoxNTMxNDI5ODM1fQ.9mQ7fPwLGywbjhnF_WVNvj3qTNAGXmvlD7e4oJ2A4QI"
+        }
 
-            Location: /questions/2
+### User Login [POST /auth/login]
++ Request (application/json)
 
-    + Body
+        {
+            "email": "bigshot2018@gmail.com",
+            "password": "bigshot1234"
+        }
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "message": "Welcome bigshot Login Successful",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNTMxMjQyNDkyLCJleHAiOjE1MzEyNDk2OTJ9.LIdfQTunfwjAwIkcDQMxD4eLZZI_evys6A_bEBgs-RU" 
+        }
+
+# Rides [/rides]
+## Get all available ride offers[GET /rides]
++ Request (application/json)
+    + headers
+    
+            Authorization: token
+        
++ Response 200 (application/json)
+
+        {
+            "success": true (boolean),
+            "message": "all available rides retrieved" (string),
+            "rides": [
+                {
+                "id": 1,
+                "userid": 6,
+                "destination": "ikeja",
+                "pickup_location": "lekki",
+                "departure_time": "11:49:00",
+                "departure_date": "2018-11-10T00:00:00.000Z",
+                "created_at": "2018-07-05T15:17:57.954Z",
+                "updated_at": "2018-07-05T15:17:57.954Z"
+                },
+                {
+                "id": 1,
+                "userid": 6,
+                "destination": "ikeja",
+                "pickup_location": "lekki",
+                "departure_time": "11:49:00",
+                "departure_date": "2018-11-10T00:00:00.000Z",
+                "created_at": "2018-07-05T15:17:57.954Z",
+                "updated_at": "2018-07-05T15:17:57.954Z"
+                }
+            ] 
+        }
+        
+## Get the details of a ride offer [GET /rides/{rideId}]
+
++ Parameters
+    + rideId (number) - ID of the ride in the form of an integer
+    
++ Request (application/json)
+    + headers
+    
+            Authorization: token
+
++ Response 200 (application/json)
+
+        {
+            "success": true (boolean),
+            "message": "Ride Found" (string),
+            "rideDetails": [
+                {
+                "id": 2,
+                "userid": 1,
+                "destination": "ikeja",
+                "pickup_location": "lekki",
+                "departure_time": "11:49:00",
+                "departure_date": "2018-11-10T00:00:00.000Z",
+                "created_at": "2018-07-05T15:17:57.954Z",
+                "updated_at": "2018-07-05T15:17:57.954Z"
+                }
+            ]  
+        }
+        
+## Create a ride offer[POST /users/rides]
++ Request (application/json)
+    + headers
+    
+            Authorization: token
+
++ Request (application/json)
+
+        {
+            "destination": "lekki",
+            "pickUpLocation": "magodo",
+            "departureTime": "15:30",
+            "departureDate": "11/12/2018"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "success": true,
+            "message": "Ride created successfully",
+            "data": {
+                "id": 6,
+                "userid": 6,
+                "destination": "lekki",
+                "pickup_location": "magodo",
+                "departure_time": "15:30:00",
+                "departure_date": "2018-11-11T23:00:00.000Z",
+                "created_at": "2018-07-09T20:41:56.566Z",
+                "updated_at": "2018-07-09T20:41:56.566Z"
             }
+        }
+        
+## Make a ride request[POST /rides/{rideId}/requests]
++ Parameters
+    + rideId (number) - ID of the ride in the form of an integer
+    
++ Request (application/json)
+    + headers
+    
+            Authorization: token
+
++ Response 201 (application/json)
+
+        {
+            "success": true,
+            "message": "Ride has been requested",
+            "result": {
+                "id": 30,
+                "request_status": "pending",
+                "userid": 8,
+                "rideid": 6,
+                "created_at": "2018-07-10T14:50:14.938Z",
+                "updated_at": "2018-07-10T14:50:14.938Z"
+            }
+        }
+
+## View all requests for a ride offer[GET /users/rides/{rideId}/requests]
++ Parameters
+    + rideId (number) - ID of the ride in the form of an integer
+    
++ Request (application/json)
+    + headers
+    
+            Authorization: token
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "requests": [
+                {
+                    "requestid": 3,
+                    "request_status": "pending",
+                    "driver_id": 4,
+                    "rider_id": 5,
+                    "full_name": "Adebanjo",
+                    "rideid": 3,
+                    "created_at": "2018-07-14T22:02:22.690Z",
+                    "updated_at": "2018-07-14T22:02:22.690Z"
+                },
+                {
+                    "requestid": 4,
+                    "request_status": "pending",
+                    "driver_id": 4,
+                    "rider_id": 5,
+                    "full_name": "Phil",
+                    "rideid": 3,
+                    "created_at": "2018-07-14T22:02:22.690Z",
+                    "updated_at": "2018-07-14T22:02:22.690Z"
+                }
+            ]
+        }
+        
+## Accept or reject a request for a ride offer[PUT /users/rides/{rideId}/requests/{requestId}]
++ Parameters
+    + rideId (number) - ID of the ride in the form of an integer
+    + requestId (number) - ID of the ride request in the form of an integer
+    
++ Request (application/json)
+    + headers
+    
+            Authorization: token
+
++ Request (application/json)
+
+        {
+            "response": "accepted"
+        }
+
++ Response 202 (application/json)
+
+        {
+            "success": true,
+            "message": "Ride request status updated, status - accepted"
+        }

@@ -48,8 +48,11 @@ Required Features
 Project is currently being built with the Project Management Tool, Pivotal Tracker. You can find the template at
 https://www.pivotaltracker.com/n/projects/2178590
 
-#Template
+# Template
 UI template is hosted at https://tomiadebanjo.github.io/ride-my-way/
+
+# API Documentation
+API documentation is hosted at https://ridemyway19.docs.apiary.io
 
 #API v1 url
 API v1 is hosted at https://ride-my-way-zaz.herokuapp.com

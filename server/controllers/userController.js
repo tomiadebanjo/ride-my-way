@@ -32,6 +32,9 @@ const signUp = (req, res) => {
       { expiresIn: 7200 },
     );
     return res.status(201).json({
+      success: true,
+      userId: result.rows[0].id,
+      fullName: result.rows[0].full_name,
       message: 'User registration successful',
       token,
     });
@@ -66,6 +69,8 @@ const login = (req, res) => {
     const name = result.rows[0].full_name;
     return res.status(200).json({
       success: true,
+      userId: result.rows[0].id,
+      fullName: result.rows[0].full_name,
       message: `Welcome ${name}, Login Successful`,
       token,
     });

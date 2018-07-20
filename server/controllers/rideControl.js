@@ -26,9 +26,20 @@ const newRide = (req, res) => {
 };
 
 const singleRide = (req, res) => {
-  const text = 'SELECT * FROM rides WHERE id = $1';
+  const text = `SELECT rides.id, users.full_name AS fullName, userid, destination, pickup_location, departure_time, 
+  departure_Date, rides.created_at, rides.updated_at
+  FROM rides
+  INNER JOIN users ON rides.userId = users.id
+  WHERE rides.id = $1`;
+
   const values = [Number(req.params.rideId)];
   pool.query(text, values, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
     if (result.rows === undefined || result.rows.length === 0) {
       return res.status(404).json({
         success: false,

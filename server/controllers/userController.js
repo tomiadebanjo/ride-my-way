@@ -29,15 +29,18 @@ const signUp = (req, res) => {
         id: result.rows[0].id,
       },
       secret,
-      { expiresIn: 7200 },
+      { expiresIn: 72000 },
     );
-    return res.status(201).json({
-      success: true,
-      userId: result.rows[0].id,
-      fullName: result.rows[0].full_name,
-      message: 'User registration successful',
-      token,
-    });
+    return res
+      .status(201)
+      .json({
+        success: true,
+        userId: result.rows[0].id,
+        fullName: result.rows[0].full_name,
+        email: result.rows[0].email,
+        message: 'User registration successful',
+        token,
+      });
   });
 };
 
@@ -64,13 +67,14 @@ const login = (req, res) => {
         id: result.rows[0].id,
       },
       secret,
-      { expiresIn: 7200 },
+      { expiresIn: 72000 },
     );
     const name = result.rows[0].full_name;
     return res.status(200).json({
       success: true,
       userId: result.rows[0].id,
       fullName: result.rows[0].full_name,
+      email: result.rows[0].email,
       message: `Welcome ${name}, Login Successful`,
       token,
     });
